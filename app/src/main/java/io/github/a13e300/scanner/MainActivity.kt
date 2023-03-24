@@ -1,13 +1,12 @@
 package io.github.a13e300.scanner
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.github.a13e300.scanner.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -28,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
+                R.id.navigation_generator, R.id.navigation_dashboard, R.id.navigation_notifications
             )
         )
         setSupportActionBar(binding.toolbar)

@@ -1,22 +1,23 @@
 package io.github.a13e300.scanner.ui.home
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.EncodeHintType
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
+import io.github.a13e300.scanner.R
 import io.github.a13e300.scanner.Utils
-import io.github.a13e300.scanner.databinding.FragmentHomeBinding
+import io.github.a13e300.scanner.databinding.FragmentGeneratorBinding
 
-class HomeFragment : Fragment() {
+class GeneratorFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: FragmentGeneratorBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -30,7 +31,7 @@ class HomeFragment : Fragment() {
         val homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentGeneratorBinding.inflate(inflater, container, false)
         val root: View = binding.root
         return root
     }
@@ -48,8 +49,10 @@ class HomeFragment : Fragment() {
         hints[EncodeHintType.MARGIN] = 1 //default is 4
         //图像数据转换，使用了矩阵转换
         val matrix = writer.encode(content, BarcodeFormat.QR_CODE, 350, 350, hints)
-        val bitmap = Utils.createBitmap(matrix)
-        _binding?.image?.setImageBitmap(bitmap)
+        var bitmap = Utils.createBitmap(matrix)
+        val logo = BitmapFactory.decodeResource(resources, R.drawable.njupt_logo)
+        bitmap = Utils.addLogo(bitmap, logo)!!
+        binding.image.setImageBitmap(bitmap)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
