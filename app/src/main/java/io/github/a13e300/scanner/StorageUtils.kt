@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.ContentValues
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
@@ -25,7 +26,7 @@ object StorageUtils {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             saveImageQ(context, fileName, bitmap)
         } else {
-            saveImagePreQ(fileName, bitmap)
+            saveImagePreQ(context, fileName, bitmap)
         }
     }
 
@@ -55,13 +56,18 @@ object StorageUtils {
         }
     }
 
-    private fun saveImagePreQ(fileName: String, bitmap: Bitmap) {
+    private fun saveImagePreQ(context: Context, fileName: String, bitmap: Bitmap) {
         val imagesDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
         val image = File(imagesDir, fileName)
         val fos = FileOutputStream(image)
         fos.use {
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, it)
         }
+        // 确保保存的图片能被系统相册扫描
+        context.sendBroadcast(Intent(
+            Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+            Uri.fromFile(image)
+        ))
     }
 
     fun verifyStoragePermissions(activity: Activity) {
