@@ -5,8 +5,14 @@ import android.view.*
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
+import com.google.android.material.snackbar.Snackbar
 import io.github.a13e300.scanner.R
+import io.github.a13e300.scanner.StorageUtils
 import io.github.a13e300.scanner.databinding.FragmentGeneratorBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class GeneratorFragment : Fragment() {
 
@@ -30,6 +36,9 @@ class GeneratorFragment : Fragment() {
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                if (menuItem.itemId == R.id.save_qr_code) {
+                    saveImage()
+                }
                 return true
             }
 
@@ -37,6 +46,21 @@ class GeneratorFragment : Fragment() {
 
         _binding = FragmentGeneratorBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    private fun saveImage() {
+        viewModel.image.value?.also { img ->
+            lifecycleScope.launch {
+                withContext(Dispatchers.IO) {
+                    StorageUtils.saveImages(requireContext(), img)
+                }
+                Snackbar.make(
+                    binding.root,
+                    "saved",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
