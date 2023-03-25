@@ -71,24 +71,18 @@ object StorageUtils {
     }
 
     fun verifyStoragePermissions(activity: Activity) {
-        try {
-            //授权列表
-            val permissionList: MutableList<String> = ArrayList()
-            //检查是否获取该权限 WRITE_EXTERNAL_STORAGE
-            if (ContextCompat.checkSelfPermission(
-                    activity,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            }
-            if (!permissionList.isEmpty()) { //权限列表不是空
-                val permissions = permissionList.toTypedArray()
-                //动态申请权限的请求
-                ActivityCompat.requestPermissions(activity, permissions, 1)
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
+        // 检查是否获取该权限 WRITE_EXTERNAL_STORAGE
+        if (ContextCompat.checkSelfPermission(
+                activity,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // 动态申请权限的请求
+            ActivityCompat.requestPermissions(
+                activity,
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                1
+            )
         }
     }
 
