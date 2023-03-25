@@ -1,13 +1,18 @@
 package io.github.a13e300.scanner
 
+import android.Manifest
+import android.app.Activity
 import android.content.ContentValues
 import android.content.Context
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
@@ -58,4 +63,27 @@ object StorageUtils {
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, it)
         }
     }
+
+    fun verifyStoragePermissions(activity: Activity) {
+        try {
+            //授权列表
+            val permissionList: MutableList<String> = ArrayList()
+            //检查是否获取该权限 WRITE_EXTERNAL_STORAGE
+            if (ContextCompat.checkSelfPermission(
+                    activity,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            }
+            if (!permissionList.isEmpty()) { //权限列表不是空
+                val permissions = permissionList.toTypedArray()
+                //动态申请权限的请求
+                ActivityCompat.requestPermissions(activity, permissions, 1)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
 }

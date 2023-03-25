@@ -1,5 +1,6 @@
 package io.github.a13e300.scanner
 
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
@@ -33,5 +34,9 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            StorageUtils.verifyStoragePermissions(this)
+        }
     }
 }
