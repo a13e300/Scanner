@@ -1,13 +1,10 @@
 package io.github.a13e300.scanner.ui.home
 
-import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import io.github.a13e300.scanner.QRCode
+import androidx.fragment.app.activityViewModels
 import io.github.a13e300.scanner.R
 import io.github.a13e300.scanner.databinding.FragmentGeneratorBinding
 
@@ -19,30 +16,38 @@ class GeneratorFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private val viewModel by activityViewModels<GeneratorViewModel>()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+
+        requireActivity().addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.qr_generator_menu, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return true
+            }
+
+        }, viewLifecycleOwner)
 
         _binding = FragmentGeneratorBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
-    }
-
-    private fun generateQRCode(content: String) {
-        val qrcode = QRCode(content, 500, 500)
-        qrcode.drawLogo(BitmapFactory.decodeResource(resources, R.drawable.njupt_logo))
-        binding.image.setImageBitmap(qrcode.getImage())
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        generateQRCode("hello")
+        viewModel.image.observe(viewLifecycleOwner) {
+            binding.image.setImageBitmap(it)
+        }
+        binding.editText.setText(viewModel.content.value)
         binding.button.setOnClickListener {
-            generateQRCode(binding.editText.text.toString())
+            viewModel.content.value = binding.editText.text.toString()
+            viewModel.updateQRCode()
         }
     }
 

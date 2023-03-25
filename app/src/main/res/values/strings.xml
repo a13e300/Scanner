@@ -3,4 +3,6 @@
     <string name="title_generator">Generator</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="save_qr_code_title">Save</string>
+    <string name="create">Create</string>
 </resources>
