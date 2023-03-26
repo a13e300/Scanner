@@ -1,5 +1,6 @@
 package io.github.a13e300.scanner.ui.generator
 
+import android.os.Build
 import android.os.Bundle
 import android.view.*
 import androidx.core.view.MenuProvider
@@ -23,6 +24,16 @@ class GeneratorFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel by activityViewModels<GeneratorViewModel>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            StorageUtils.verifyStoragePermissions(requireActivity())
+        }
+
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
