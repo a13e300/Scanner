@@ -5,4 +5,8 @@
     <string name="title_settings">Settings</string>
     <string name="save_qr_code_title">Save</string>
     <string name="create">Create</string>
+    <string name="title_scan_result">Scan Result</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="scan_with_camera">Scan with camera</string>
 </resources>

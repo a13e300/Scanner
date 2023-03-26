@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scanning_navigation"
+    app:startDestination="@id/navigation_scanner_home">
+
+    <fragment
+        android:id="@+id/navigation_scanner_home"
+        android:name="io.github.a13e300.scanner.ui.scanner.ScannerHome"
+        android:label="@string/title_scanner"
+        tools:layout="@layout/fragment_scanner_home" >
+        <action
+            android:id="@+id/action_navigation_scanner_home_to_navigation_camera_scan"
+            app:destination="@id/navigation_camera_scan" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_camera_scan"
+        android:name="io.github.a13e300.scanner.ui.scanner.CameraScanningFragment"
+        android:label="@string/title_scanner"
+        tools:layout="@layout/fragment_camera_scanning" >
+        <action
+            android:id="@+id/action_navigation_camera_scan_to_navigation_scanning_result"
+            app:destination="@id/navigation_scanning_result"
+            app:popUpTo="@id/navigation_camera_scan"
+            app:popUpToInclusive="true">
+            <argument android:name="result" app:argType="string" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_scanning_result"
+        android:name="io.github.a13e300.scanner.ui.scanner.ScanningResult"
+        android:label="@string/title_scan_result"
+        tools:layout="@layout/fragment_scanning_result" />
+
+</navigation>

@@ -7,7 +7,7 @@
         android:title="@string/title_generator" />
 
     <item
-        android:id="@+id/navigation_scanner"
+        android:id="@+id/scanning_navigation"
         android:icon="@drawable/ic_qr_scan"
         android:title="@string/title_scanner" />
 
