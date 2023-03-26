@@ -1,4 +1,4 @@
-package io.github.a13e300.scanner.ui.dashboard
+package io.github.a13e300.scanner.ui.scanner
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

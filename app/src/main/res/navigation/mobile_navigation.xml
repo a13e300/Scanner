@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_generator"
-        android:name="io.github.a13e300.scanner.ui.home.GeneratorFragment"
+        android:name="io.github.a13e300.scanner.ui.generator.GeneratorFragment"
         android:label="@string/title_generator"
         tools:layout="@layout/fragment_generator" />
 
     <fragment
         android:id="@+id/navigation_scanner"
-        android:name="io.github.a13e300.scanner.ui.dashboard.DashboardFragment"
+        android:name="io.github.a13e300.scanner.ui.scanner.ScannerFragment"
         android:label="@string/title_scanner"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_scanner" />
 
     <fragment
         android:id="@+id/navigation_settings"
-        android:name="io.github.a13e300.scanner.ui.notifications.NotificationsFragment"
+        android:name="io.github.a13e300.scanner.ui.settings.SettingsFragment"
         android:label="@string/title_settings"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_settings" />
 </navigation>

@@ -1,4 +1,4 @@
-package io.github.a13e300.scanner.ui.notifications
+package io.github.a13e300.scanner.ui.settings
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
