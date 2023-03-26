@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Scanner</string>
+    <string name="title_generator">生成器</string>
+    <string name="title_scanner">扫描器</string>
+    <string name="title_settings">设置</string>
+    <string name="save_qr_code_title">保存</string>
+    <string name="create">创建</string>
+    <string name="title_scan_result">扫描结果</string>
+    <string name="scan_with_camera">使用相机扫描</string>
+    <string name="tips_saved_to_gallery">您的二维码已经保存到相册</string>
+    <string name="tips_permission_required">请授予必要的权限</string>
+</resources>

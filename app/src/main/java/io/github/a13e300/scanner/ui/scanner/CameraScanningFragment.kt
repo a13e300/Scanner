@@ -50,7 +50,7 @@ class CameraScanningFragment : Fragment() {
         else {
             Snackbar.make(
                 binding.root,
-                "Permission not granted",
+                getString(R.string.tips_permission_required),
                 Snackbar.LENGTH_SHORT
             ).show()
         }

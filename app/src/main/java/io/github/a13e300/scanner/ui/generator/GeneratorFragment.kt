@@ -67,7 +67,7 @@ class GeneratorFragment : Fragment() {
                 }
                 Snackbar.make(
                     binding.root,
-                    "saved",
+                    getString(R.string.tips_saved_to_gallery),
                     Snackbar.LENGTH_SHORT
                 ).show()
             }
