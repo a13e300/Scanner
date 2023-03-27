@@ -65,11 +65,12 @@ class GeneratorFragment : Fragment() {
                 withContext(Dispatchers.IO) {
                     StorageUtils.saveImages(requireContext(), img)
                 }
+                // TODO: create a function to show snackbar in all fragments
                 Snackbar.make(
                     binding.root,
                     getString(R.string.tips_saved_to_gallery),
                     Snackbar.LENGTH_SHORT
-                ).show()
+                ).setAnchorView(R.id.nav_view).show()
             }
         }
     }
@@ -81,6 +82,7 @@ class GeneratorFragment : Fragment() {
         }
         binding.editText.setText(viewModel.content.value)
         binding.button.setOnClickListener {
+            // TODO: check too long input
             viewModel.content.value = binding.editText.text.toString()
             viewModel.updateQRCode()
         }

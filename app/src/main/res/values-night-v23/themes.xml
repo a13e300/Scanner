@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Scanner.V23" parent="Theme.Scanner.Base">
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <style name="Theme.Scanner" parent="Theme.Scanner.V23" />
+</resources>

@@ -2,6 +2,7 @@ package io.github.a13e300.scanner
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.LayoutInflaterCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -9,6 +10,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.github.a13e300.scanner.databinding.ActivityMainBinding
+import rikka.insets.WindowInsetsHelper
+import rikka.layoutinflater.view.LayoutInflaterFactory
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,6 +19,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        LayoutInflaterCompat.setFactory2(layoutInflater, LayoutInflaterFactory(delegate)
+            .addOnViewCreatedListener(WindowInsetsHelper.LISTENER))
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
