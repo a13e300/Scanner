@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.scanner.CameraScanningFragment"
     android:paddingTop="?actionBarSize"
-    app:fitsSystemWindowsInsets="top|bottom">
+    app:fitsSystemWindowsInsets="top">
 
     <androidx.camera.view.PreviewView
         android:id="@+id/viewFinder"

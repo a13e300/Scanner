@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.scanner.ScannerHome"
     android:paddingTop="?actionBarSize"
-    app:fitsSystemWindowsInsets="top|bottom">
+    app:fitsSystemWindowsInsets="top">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"

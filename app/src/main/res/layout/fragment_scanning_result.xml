@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="?actionBarSize"
-    app:fitsSystemWindowsInsets="top|bottom"
+    app:fitsSystemWindowsInsets="top"
     tools:context=".ui.scanner.ScanningResult">
 
     <com.google.android.material.textview.MaterialTextView
