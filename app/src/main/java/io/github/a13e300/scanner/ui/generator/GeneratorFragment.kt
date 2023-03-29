@@ -192,6 +192,7 @@ class GeneratorFragment : Fragment() {
 class ContentInputFragment : DialogFragment() {
     private val viewModel by activityViewModels<GeneratorViewModel>()
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        // FIXME: textInput disappearedwhen soft input shown on API 22
         val binding = FragmentContentInputBinding.inflate(requireActivity().layoutInflater, null, false)
         viewModel.info.observe(this) {
             binding.editText.setText(it.content)

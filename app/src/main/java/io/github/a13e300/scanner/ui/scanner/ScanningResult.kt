@@ -24,7 +24,7 @@ class ScanningResult : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentScanningResultBinding.inflate(inflater, container, false)
-        binding.resultText.text = result
+        binding.resultText.setText(result)
         return binding.root
     }
 
