@@ -17,4 +17,9 @@
     <string name="icon_none">None Icon</string>
     <string name="icon_default">Default</string>
     <string name="icon_custom">Custom Icon</string>
+    <string name="crop_image">Crop Image</string>
+    <string name="image_crop_done_title">Done</string>
+    <string name="custom_icon_title">Custom Icon</string>
+    <string name="custom_icon_change">Change</string>
+    <string name="custom_icon_clear">Clear</string>
 </resources>

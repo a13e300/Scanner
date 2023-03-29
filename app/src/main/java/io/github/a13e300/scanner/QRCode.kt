@@ -55,6 +55,7 @@ class QRCode(value: String, val width: Int, val height: Int) {
         val logoWidth = logo.width
         val logoHeight = logo.height
         // logo大小为二维码整体大小的1/5
+        // TODO: calculate logo size
         val scaleFactor = srcWidth * 0.2f / logoWidth
         val canvas = Canvas(mBitmap)
         canvas.scale(

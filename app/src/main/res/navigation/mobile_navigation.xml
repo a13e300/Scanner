@@ -5,11 +5,7 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@id/scanning_navigation">
 
-    <fragment
-        android:id="@+id/navigation_generator"
-        android:name="io.github.a13e300.scanner.ui.generator.GeneratorFragment"
-        android:label="@string/title_generator"
-        tools:layout="@layout/fragment_generator" />
+    <include app:graph="@navigation/generator_navigation" />
 
     <include app:graph="@navigation/scanning_navigation" />
 
