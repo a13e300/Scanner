@@ -1,6 +1,7 @@
 package io.github.a13e300.scanner.ui.generator
 
 import android.app.Dialog
+import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
 import android.view.*
@@ -82,6 +83,19 @@ class GeneratorFragment : Fragment() {
         ).setAnchorView(R.id.nav_view).show()
     }
 
+    private fun updateLogo() {
+        val bitmap = when (binding.iconGroup.checkedButtonId) {
+            R.id.icon_default -> {
+                BitmapFactory.decodeResource(
+                    resources,
+                    R.drawable.default_logo
+                )
+            }
+            else -> null
+        }
+        viewModel.info.value = viewModel.info.value!!.copy(icon = bitmap)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.info.observe(viewLifecycleOwner) {
@@ -102,6 +116,10 @@ class GeneratorFragment : Fragment() {
             setOnClickListener {
                 ContentInputFragment().show(parentFragmentManager, "dialog")
             }
+        }
+        updateLogo()
+        binding.iconGroup.addOnButtonCheckedListener { _, _, _ ->
+            updateLogo()
         }
     }
 

@@ -2,14 +2,13 @@ package io.github.a13e300.scanner.ui.generator
 
 import android.app.Application
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import io.github.a13e300.scanner.QRCode
-import io.github.a13e300.scanner.R
 
 data class QRCodeInfo(
-    val content: String = ""
+    val content: String = "",
+    val icon: Bitmap? = null
 )
 
 class GeneratorViewModel(application: Application) : AndroidViewModel(application) {
@@ -21,15 +20,13 @@ class GeneratorViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     fun updateQRCode() {
-        val content = info.value?.content
-        if (content?.isNotEmpty() == true) {
+        val info = info.value ?: return
+        val content = info.content
+        if (content.isNotEmpty() == true) {
             val qrcode = QRCode(content, 500, 500)
-            qrcode.drawLogo(
-                BitmapFactory.decodeResource(
-                    getApplication<Application>().resources,
-                    R.drawable.njupt_logo
-                )
-            )
+            info.icon?.let { icon ->
+                qrcode.drawLogo(icon)
+            }
             image.value = qrcode.getImage()
         } else {
             image.value = null

@@ -14,4 +14,7 @@
     <string name="qr_code_content_too_long">Your content is too long</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="icon_none">None Icon</string>
+    <string name="icon_default">Default</string>
+    <string name="icon_custom">Custom Icon</string>
 </resources>
