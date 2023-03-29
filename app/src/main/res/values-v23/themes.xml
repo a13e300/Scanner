@@ -2,6 +2,7 @@
 <resources>
 
     <style name="Theme.Scanner.V23" parent="Theme.Scanner.Base">
+        <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
