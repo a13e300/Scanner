@@ -8,16 +8,20 @@ import androidx.lifecycle.MutableLiveData
 import io.github.a13e300.scanner.QRCode
 import io.github.a13e300.scanner.R
 
+data class QRCodeInfo(
+    val content: String = ""
+)
+
 class GeneratorViewModel(application: Application) : AndroidViewModel(application) {
     val image: MutableLiveData<Bitmap?> by lazy {
         MutableLiveData<Bitmap?>(null)
     }
-    val content: MutableLiveData<String?> by lazy {
-        MutableLiveData<String?>(null)
+    val info: MutableLiveData<QRCodeInfo> by lazy {
+        MutableLiveData<QRCodeInfo>(QRCodeInfo())
     }
 
     fun updateQRCode() {
-        val content = content.value
+        val content = info.value?.content
         if (content?.isNotEmpty() == true) {
             val qrcode = QRCode(content, 500, 500)
             qrcode.drawLogo(
@@ -30,6 +34,5 @@ class GeneratorViewModel(application: Application) : AndroidViewModel(applicatio
         } else {
             image.value = null
         }
-
     }
 }

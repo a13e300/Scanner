@@ -10,4 +10,9 @@
     <string name="scan_with_camera">使用相机扫描</string>
     <string name="tips_saved_to_gallery">您的二维码已经保存到相册</string>
     <string name="tips_permission_required">请授予必要的权限</string>
+    <string name="qr_code_content_hint">内容</string>
+    <string name="qr_code_content_too_long">您输入的内容太长</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="qr_code_content">内容</string>
 </resources>

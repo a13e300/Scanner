@@ -9,4 +9,9 @@
     <string name="scan_with_camera">Scan with camera</string>
     <string name="tips_saved_to_gallery">Your QR code is saved to gallery</string>
     <string name="tips_permission_required">Please grant necessary permissions</string>
+    <string name="qr_code_content_hint">Content</string>
+    <string name="qr_code_content">Content</string>
+    <string name="qr_code_content_too_long">Your content is too long</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
 </resources>

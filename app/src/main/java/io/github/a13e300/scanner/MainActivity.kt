@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.appBar.isLifted = true
 
         val navView: BottomNavigationView = binding.navView
 
