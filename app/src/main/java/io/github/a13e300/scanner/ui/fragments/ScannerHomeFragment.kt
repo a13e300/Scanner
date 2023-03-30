@@ -4,14 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import io.github.a13e300.scanner.R
 import io.github.a13e300.scanner.databinding.FragmentScannerHomeBinding
 
-class ScannerHome : Fragment() {
+class ScannerHomeFragment : BaseFragment() {
 
-    override fun onCreateView(
+    override fun onCreateContent(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {

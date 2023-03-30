@@ -15,10 +15,8 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
 import io.github.a13e300.scanner.QRCodeAnalyzer
 import io.github.a13e300.scanner.R
 import io.github.a13e300.scanner.databinding.FragmentCameraScanningBinding
@@ -26,7 +24,7 @@ import io.github.a13e300.scanner.ui.models.ScannerModel
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-class CameraScanningFragment : Fragment() {
+class CameraScanningFragment : BaseFragment() {
 
     companion object {
         private const val TAG = "Scanner"
@@ -46,11 +44,11 @@ class CameraScanningFragment : Fragment() {
         if (allPermissionsGranted())
             startCamera()
         else {
-            Snackbar.make(
-                binding.root,
-                getString(R.string.tips_permission_required),
-                Snackbar.LENGTH_SHORT
-            ).show()
+            showSnackBar(getString(R.string.tips_permission_required))
+            // TODO: show this in home fragment
+            view?.postDelayed({
+                findNavController().navigateUp()
+            }, 1000)
         }
     }
 
@@ -130,7 +128,7 @@ class CameraScanningFragment : Fragment() {
         cameraExecutor = Executors.newSingleThreadExecutor()
     }
 
-    override fun onCreateView(
+    override fun onCreateContent(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?

@@ -8,11 +8,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import io.github.a13e300.scanner.R
 import io.github.a13e300.scanner.databinding.FragmentScanningResultBinding
 
-class ScanningResult : Fragment() {
+class ScanningResultFragment : BaseFragment() {
     private var result: String? = null
 
     companion object {
@@ -26,7 +25,7 @@ class ScanningResult : Fragment() {
         }
     }
 
-    override fun onCreateView(
+    override fun onCreateContent(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {

@@ -5,18 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import io.github.a13e300.scanner.databinding.FragmentSettingsBinding
 import io.github.a13e300.scanner.ui.models.SettingsViewModel
 
-class SettingsFragment : Fragment() {
+class SettingsFragment : BaseFragment() {
 
     private var _binding: FragmentSettingsBinding? = null
 
     private val binding get() = _binding!!
 
-    override fun onCreateView(
+    override fun onCreateContent(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?

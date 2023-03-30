@@ -19,7 +19,6 @@ import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.snackbar.Snackbar
 import com.google.zxing.WriterException
 import io.github.a13e300.scanner.R
 import io.github.a13e300.scanner.databinding.FragmentContentInputBinding
@@ -32,7 +31,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class GeneratorFragment : Fragment() {
+class GeneratorFragment : BaseFragment() {
     companion object {
         private const val REQUEST_CROP_FOR_ICON = "crop_for_icon"
     }
@@ -53,7 +52,7 @@ class GeneratorFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(
+    override fun onCreateContent(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -87,14 +86,7 @@ class GeneratorFragment : Fragment() {
         }
     }
 
-    private fun showSnackBar(msg: String) {
-        // TODO: create a function to show snackbar in ALL fragments
-        Snackbar.make(
-            binding.root,
-            msg,
-            Snackbar.LENGTH_SHORT
-        ).setAnchorView(R.id.nav_view).show()
-    }
+
 
     private val pickCustomIconLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) {
         it ?: return@registerForActivityResult

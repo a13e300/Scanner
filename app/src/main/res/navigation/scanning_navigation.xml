@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_scanner_home"
-        android:name="io.github.a13e300.scanner.ui.fragments.ScannerHome"
+        android:name="io.github.a13e300.scanner.ui.fragments.ScannerHomeFragment"
         android:label="@string/title_scanner"
         tools:layout="@layout/fragment_scanner_home" >
         <action
@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/navigation_scanning_result"
-        android:name="io.github.a13e300.scanner.ui.fragments.ScanningResult"
+        android:name="io.github.a13e300.scanner.ui.fragments.ScanningResultFragment"
         android:label="@string/title_scan_result"
         tools:layout="@layout/fragment_scanning_result" />
 
