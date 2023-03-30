@@ -24,4 +24,7 @@
     <string name="custom_icon_change">更换</string>
     <string name="custom_icon_clear">清除</string>
     <string name="share_qr_code_title">分享</string>
+    <string name="scan_from_file">从文件扫描</string>
+    <string name="qr_code_not_found">图片中未找到二维码</string>
+    <string name="qr_code_cancelled">已取消</string>
 </resources>

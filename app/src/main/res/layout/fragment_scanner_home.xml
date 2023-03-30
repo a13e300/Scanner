@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.ScannerHomeFragment"
     android:paddingTop="?actionBarSize"
+    android:orientation="vertical"
     app:fitsSystemWindowsInsets="top">
 
     <com.google.android.material.card.MaterialCardView
@@ -34,4 +35,30 @@
             />
     </com.google.android.material.card.MaterialCardView>
 
-</FrameLayout>
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:clickable="true"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="20dp"
+        android:focusable="true"
+        android:id="@+id/scan_from_file_button">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginVertical="20dp"
+            android:src="@drawable/ic_image"
+            tools:ignore="contentDescription" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:layout_marginStart="90dp"
+            style="@style/MaterialAlertDialog.Material3.Title.Text"
+            android:text="@string/scan_from_file"
+            />
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

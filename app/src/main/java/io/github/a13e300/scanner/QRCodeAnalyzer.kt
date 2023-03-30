@@ -1,6 +1,7 @@
 package io.github.a13e300.scanner
 
 import android.graphics.ImageFormat
+import android.os.Build
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import androidx.lifecycle.MutableLiveData
@@ -13,11 +14,14 @@ class QRCodeAnalyzer(
     private val scanResult: MutableLiveData<String?>
 ) : ImageAnalysis.Analyzer {
 
-    private val supportedImageFormats = listOf(
-        ImageFormat.YUV_420_888,
-        ImageFormat.YUV_422_888,
-        ImageFormat.YUV_444_888,
-    )
+    private val supportedImageFormats = mutableListOf(
+        ImageFormat.YUV_420_888
+    ).also {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            it.add(ImageFormat.YUV_422_888)
+            it.add(ImageFormat.YUV_444_888)
+        }
+    }
 
     override fun analyze(image: ImageProxy) {
         if (isScanning.value == true && image.format in supportedImageFormats) {
@@ -39,11 +43,11 @@ class QRCodeAnalyzer(
                     setHints(
                         mapOf(
                             DecodeHintType.POSSIBLE_FORMATS to arrayListOf(
-                                BarcodeFormat.QR_CODE
+                                BarcodeFormat.QR_CODE,
                             )
                         )
                     )
-                }.decode(binaryBmp)
+                }.decodeWithState(binaryBmp)
                 scanResult.postValue(result.text)
             } catch (e: NotFoundException) {
                 // ignore
