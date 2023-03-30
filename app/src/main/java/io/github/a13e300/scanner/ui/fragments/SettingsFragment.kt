@@ -1,4 +1,4 @@
-package io.github.a13e300.scanner.ui.settings
+package io.github.a13e300.scanner.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import io.github.a13e300.scanner.databinding.FragmentSettingsBinding
+import io.github.a13e300.scanner.ui.models.SettingsViewModel
 
 class SettingsFragment : Fragment() {
 

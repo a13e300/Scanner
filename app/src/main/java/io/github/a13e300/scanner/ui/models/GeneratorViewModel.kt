@@ -1,4 +1,4 @@
-package io.github.a13e300.scanner.ui.generator
+package io.github.a13e300.scanner.ui.models
 
 import android.app.Application
 import android.graphics.Bitmap

@@ -1,4 +1,4 @@
-package io.github.a13e300.scanner.ui.generator
+package io.github.a13e300.scanner.ui.fragments
 
 import android.net.Uri
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package io.github.a13e300.scanner.ui.generator
+package io.github.a13e300.scanner.ui.fragments
 
 import android.app.Dialog
 import android.graphics.BitmapFactory
@@ -25,6 +25,7 @@ import io.github.a13e300.scanner.StorageUtils
 import io.github.a13e300.scanner.databinding.FragmentContentInputBinding
 import io.github.a13e300.scanner.databinding.FragmentGeneratorBinding
 import io.github.a13e300.scanner.parcelable
+import io.github.a13e300.scanner.ui.models.GeneratorViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -98,7 +99,8 @@ class GeneratorFragment : Fragment() {
         findNavController().navigate(R.id.crop_for_icon,
             bundleOf("uri" to ImageCropRequest(
                 it, REQUEST_CROP_FOR_ICON, 100, viewModel.customIconFile.toUri()
-            ))
+            )
+            )
         )
         setFragmentResultListener(REQUEST_CROP_FOR_ICON) { _, data ->
             val result = data.parcelable<Uri>(ImageCropFragment.ARG_RESULT)

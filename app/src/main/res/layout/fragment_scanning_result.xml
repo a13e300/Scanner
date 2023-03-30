@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:paddingTop="?actionBarSize"
     app:fitsSystemWindowsInsets="top"
-    tools:context=".ui.scanner.ScanningResult">
+    tools:context=".ui.fragments.ScanningResult">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"

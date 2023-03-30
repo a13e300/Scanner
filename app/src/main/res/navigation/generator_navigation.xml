@@ -6,7 +6,7 @@
     app:startDestination="@id/navigation_generator">
     <fragment
         android:id="@+id/navigation_generator"
-        android:name="io.github.a13e300.scanner.ui.generator.GeneratorFragment"
+        android:name="io.github.a13e300.scanner.ui.fragments.GeneratorFragment"
         android:label="@string/title_generator"
         tools:layout="@layout/fragment_generator" >
         <action android:id="@+id/crop_for_icon"
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/image_cropper"
-        android:name="io.github.a13e300.scanner.ui.generator.ImageCropFragment"
+        android:name="io.github.a13e300.scanner.ui.fragments.ImageCropFragment"
         android:label="@string/crop_image"
         tools:layout="@layout/fragment_image_crop" />
 </navigation>

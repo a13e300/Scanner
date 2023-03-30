@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:paddingTop="?actionBarSize"
     app:fitsSystemWindowsInsets="top"
-    tools:context=".ui.settings.SettingsFragment">
+    tools:context=".ui.fragments.SettingsFragment">
 
     <TextView
         android:id="@+id/text_notifications"

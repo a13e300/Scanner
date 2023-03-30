@@ -1,4 +1,4 @@
-package io.github.a13e300.scanner.ui.scanner
+package io.github.a13e300.scanner.ui.fragments
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -22,6 +22,7 @@ import com.google.android.material.snackbar.Snackbar
 import io.github.a13e300.scanner.QRCodeAnalyzer
 import io.github.a13e300.scanner.R
 import io.github.a13e300.scanner.databinding.FragmentCameraScanningBinding
+import io.github.a13e300.scanner.ui.models.ScannerModel
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 

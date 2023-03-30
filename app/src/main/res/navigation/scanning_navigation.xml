@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_scanner_home"
-        android:name="io.github.a13e300.scanner.ui.scanner.ScannerHome"
+        android:name="io.github.a13e300.scanner.ui.fragments.ScannerHome"
         android:label="@string/title_scanner"
         tools:layout="@layout/fragment_scanner_home" >
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/navigation_camera_scan"
-        android:name="io.github.a13e300.scanner.ui.scanner.CameraScanningFragment"
+        android:name="io.github.a13e300.scanner.ui.fragments.CameraScanningFragment"
         android:label="@string/title_scanner"
         tools:layout="@layout/fragment_camera_scanning" >
         <action
@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/navigation_scanning_result"
-        android:name="io.github.a13e300.scanner.ui.scanner.ScanningResult"
+        android:name="io.github.a13e300.scanner.ui.fragments.ScanningResult"
         android:label="@string/title_scan_result"
         tools:layout="@layout/fragment_scanning_result" />
 

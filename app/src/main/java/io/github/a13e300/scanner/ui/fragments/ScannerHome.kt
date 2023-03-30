@@ -1,4 +1,4 @@
-package io.github.a13e300.scanner.ui.scanner
+package io.github.a13e300.scanner.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package io.github.a13e300.scanner.ui.settings
+package io.github.a13e300.scanner.ui.models
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:paddingTop="?actionBarSize"
     app:fitsSystemWindowsInsets="top"
-    tools:context=".ui.generator.ImageCropFragment">
+    tools:context=".ui.fragments.ImageCropFragment">
 
     <com.canhub.cropper.CropImageView
         android:id="@+id/cropImageView"

@@ -7,7 +7,7 @@
     android:paddingTop="?actionBarSize"
     android:paddingBottom="50dp"
     app:fitsSystemWindowsInsets="top"
-    tools:context=".ui.generator.GeneratorFragment">
+    tools:context=".ui.fragments.GeneratorFragment">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
