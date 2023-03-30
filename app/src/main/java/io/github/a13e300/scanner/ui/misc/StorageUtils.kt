@@ -30,13 +30,17 @@ object StorageUtils {
         }
     }
 
+    fun writeBitmap(bitmap: Bitmap, os: OutputStream) {
+        os.use { bitmap.compress(Bitmap.CompressFormat.PNG, 100, it) }
+    }
+
     @RequiresApi(Build.VERSION_CODES.Q)
     private fun saveImageQ(context: Context, filename: String, bitmap: Bitmap) {
         var fos: OutputStream?
         val imageUri: Uri
         val contentValues = ContentValues().apply {
             put(MediaStore.MediaColumns.DISPLAY_NAME, filename)
-            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpg")
+            put(MediaStore.MediaColumns.MIME_TYPE, "image/png")
             put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
             put(MediaStore.Video.Media.IS_PENDING, 1)
         }
@@ -46,9 +50,7 @@ object StorageUtils {
         contentResolver.also { resolver ->
             imageUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)!!
             fos = imageUri.let { resolver.openOutputStream(it) }
-            fos?.use {
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, it)
-            }
+            fos?.also { writeBitmap(bitmap, it) }
 
             contentValues.clear()
             contentValues.put(MediaStore.Video.Media.IS_PENDING, 0)
@@ -60,9 +62,7 @@ object StorageUtils {
         val imagesDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
         val image = File(imagesDir, fileName)
         val fos = FileOutputStream(image)
-        fos.use {
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, it)
-        }
+        writeBitmap(bitmap, fos)
         // 确保保存的图片能被系统相册扫描
         context.sendBroadcast(Intent(
             Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,

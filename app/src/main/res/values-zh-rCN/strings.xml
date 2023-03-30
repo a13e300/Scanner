@@ -23,4 +23,5 @@
     <string name="custom_icon_title">自定义图标</string>
     <string name="custom_icon_change">更换</string>
     <string name="custom_icon_clear">清除</string>
+    <string name="share_qr_code_title">分享</string>
 </resources>

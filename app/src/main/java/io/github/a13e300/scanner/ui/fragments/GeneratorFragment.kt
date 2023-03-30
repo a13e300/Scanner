@@ -1,6 +1,7 @@
 package io.github.a13e300.scanner.ui.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.text.InputType
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.view.MenuProvider
@@ -19,6 +21,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.zxing.WriterException
+import io.github.a13e300.scanner.BuildConfig
 import io.github.a13e300.scanner.R
 import io.github.a13e300.scanner.databinding.FragmentContentInputBinding
 import io.github.a13e300.scanner.databinding.FragmentGeneratorBinding
@@ -28,10 +31,12 @@ import io.github.a13e300.scanner.ui.models.GeneratorViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.File
 
 class GeneratorFragment : BaseFragment() {
     companion object {
         private const val REQUEST_CROP_FOR_ICON = "crop_for_icon"
+        private const val SHARE_PATH = "share/share.png"
     }
 
     private var _binding: FragmentGeneratorBinding? = null
@@ -62,10 +67,17 @@ class GeneratorFragment : BaseFragment() {
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                if (menuItem.itemId == R.id.save_qr_code) {
-                    saveImage()
+                return when (menuItem.itemId) {
+                    R.id.save_qr_code -> {
+                        saveImage()
+                        true
+                    }
+                    R.id.share_qr_code -> {
+                        shareImage()
+                        true
+                    }
+                    else -> false
                 }
-                return true
             }
 
         }, viewLifecycleOwner)
@@ -84,7 +96,26 @@ class GeneratorFragment : BaseFragment() {
         }
     }
 
-
+    private fun shareImage() {
+        viewModel.image.value?.also { img ->
+            lifecycleScope.launch {
+                withContext(Dispatchers.IO) {
+                    val ctx = requireContext()
+                    val file = File(ctx.filesDir, SHARE_PATH)
+                    file.parentFile?.mkdirs()
+                    StorageUtils.writeBitmap(img, file.outputStream())
+                    val intent = Intent(Intent.ACTION_SEND).apply {
+                        putExtra(
+                            Intent.EXTRA_STREAM,
+                            FileProvider.getUriForFile(ctx, "${BuildConfig.APPLICATION_ID}.fp", file)
+                        )
+                        type = "image/png"
+                    }.let { Intent.createChooser(it, getString(R.string.share_qr_code_title)) }
+                    startActivity(intent)
+                }
+            }
+        }
+    }
 
     private val pickCustomIconLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) {
         it ?: return@registerForActivityResult
