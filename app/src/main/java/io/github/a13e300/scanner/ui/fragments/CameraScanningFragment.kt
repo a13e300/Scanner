@@ -2,7 +2,6 @@ package io.github.a13e300.scanner.ui.fragments
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,6 +14,7 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import io.github.a13e300.scanner.QRCodeAnalyzer
@@ -28,14 +28,7 @@ class CameraScanningFragment : BaseFragment() {
 
     companion object {
         private const val TAG = "Scanner"
-        private val REQUIRED_PERMISSIONS =
-            mutableListOf (
-                Manifest.permission.CAMERA
-            ).apply {
-                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
-                    add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                }
-            }.toTypedArray()
+        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
     }
 
     private val requestPermissionLauncher = registerForActivityResult(
@@ -133,6 +126,8 @@ class CameraScanningFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        // temporary fix camera preview not filling parent
+        container?.findViewById<NestedScrollView>(R.id.content)?.isFillViewport = true
         _binding = FragmentCameraScanningBinding.inflate(inflater, container, false)
         return binding.root
     }

@@ -2,7 +2,6 @@ package io.github.a13e300.scanner.ui.fragments
 
 import android.content.Context
 import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.InputType
@@ -23,7 +22,6 @@ import com.google.zxing.WriterException
 import io.github.a13e300.scanner.R
 import io.github.a13e300.scanner.databinding.FragmentContentInputBinding
 import io.github.a13e300.scanner.databinding.FragmentGeneratorBinding
-import io.github.a13e300.scanner.parcelable
 import io.github.a13e300.scanner.ui.misc.DoneMenuProvider
 import io.github.a13e300.scanner.ui.misc.StorageUtils
 import io.github.a13e300.scanner.ui.models.GeneratorViewModel
@@ -97,7 +95,6 @@ class GeneratorFragment : BaseFragment() {
             )
         )
         setFragmentResultListener(REQUEST_CROP_FOR_ICON) { _, data ->
-            val result = data.parcelable<Uri>(ImageCropFragment.ARG_RESULT)
             if (viewModel.loadCustomIcon()) {
                 viewModel.iconType.value = R.id.icon_custom
             }
