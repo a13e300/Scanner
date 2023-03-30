@@ -8,24 +8,47 @@
     app:fitsSystemWindowsInsets="top"
     tools:context=".ui.scanner.ScanningResult">
 
-    <com.google.android.material.textfield.TextInputLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:layout_gravity="center"
-        android:hint="@string/title_scan_result"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/result_text"
+        android:layout_margin="8dp"
+        style="?attr/materialCardViewFilledStyle">
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:minLines="10"
-            android:gravity="top"
-            android:focusable="false"
-            android:cursorVisible="false" />
-
-    </com.google.android.material.textfield.TextInputLayout>
+            android:padding="16dp">
+            <TextView
+                android:id="@+id/result_text"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textIsSelectable="true"
+                android:minLines="10"
+                android:autoLink="all" />
+            <androidx.constraintlayout.utils.widget.ImageFilterButton
+                android:id="@+id/copy_result"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:round="25dp"
+                android:src="@drawable/ic_copy"
+                android:background="?android:selectableItemBackground"
+                app:layout_constraintTop_toBottomOf="@id/result_text"
+                app:layout_constraintEnd_toEndOf="parent" />
+            <androidx.constraintlayout.utils.widget.ImageFilterButton
+                android:id="@+id/share_result"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:round="25dp"
+                android:src="@drawable/ic_share"
+                android:background="?android:selectableItemBackground"
+                app:layout_constraintTop_toBottomOf="@id/result_text"
+                app:layout_constraintEnd_toStartOf="@id/copy_result" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 
 </ScrollView>

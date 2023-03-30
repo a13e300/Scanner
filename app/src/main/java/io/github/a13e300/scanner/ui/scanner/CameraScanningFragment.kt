@@ -119,8 +119,6 @@ class CameraScanningFragment : Fragment() {
         }
 
         viewModel.scanResult.observe(this) { result ->
-            Log.d(TAG, "scanResult=$result")
-
             if (result != null) {
                 if (viewModel.isScanning.value == true) {
                     viewModel.isScanning.value = false
@@ -170,6 +168,5 @@ class ResultFragment: BottomSheetDialogFragment() {
         super.onDismiss(dialog)
         viewModel.isScanning.value = true
         viewModel.scanResult.value = null
-        Log.d("Result", "dismissed")
     }
 }
