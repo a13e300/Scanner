@@ -3,15 +3,16 @@ package io.github.a13e300.scanner.ui.fragments
 import android.net.Uri
 import android.os.Bundle
 import android.os.Parcelable
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
-import io.github.a13e300.scanner.R
 import io.github.a13e300.scanner.databinding.FragmentImageCropBinding
 import io.github.a13e300.scanner.parcelable
+import io.github.a13e300.scanner.ui.misc.DoneMenuProvider
 import kotlinx.parcelize.Parcelize
 
 
@@ -47,25 +48,15 @@ class ImageCropFragment : Fragment() {
                 findNavController().navigateUp()
             }
         }
-        requireActivity().addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                return menuInflater.inflate(R.menu.done_button_menu, menu)
+        requireActivity().addMenuProvider(object : DoneMenuProvider() {
+            override fun onDone(): Boolean {
+                binding.cropImageView.croppedImageAsync(
+                    reqWidth = mRequest.size,
+                    reqHeight = mRequest.size,
+                    customOutputUri = mRequest.dest
+                )
+                return true
             }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return when (menuItem.itemId) {
-                    R.id.done -> {
-                        binding.cropImageView.croppedImageAsync(
-                            reqWidth = mRequest.size,
-                            reqHeight = mRequest.size,
-                            customOutputUri = mRequest.dest
-                        )
-                        true
-                    }
-                    else -> false
-                }
-            }
-
         }, viewLifecycleOwner)
         return binding.root
     }
@@ -73,13 +64,5 @@ class ImageCropFragment : Fragment() {
     companion object {
         private const val ARG_URI = "uri"
         const val ARG_RESULT = "result"
-
-        @JvmStatic
-        fun newInstance(param1: Uri?) =
-            ImageCropFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(ARG_URI, param1)
-                }
-            }
     }
 }

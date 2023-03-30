@@ -1,4 +1,4 @@
-package io.github.a13e300.scanner
+package io.github.a13e300.scanner.ui.misc
 
 import android.Manifest
 import android.app.Activity

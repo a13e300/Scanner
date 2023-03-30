@@ -12,15 +12,17 @@ import androidx.fragment.app.Fragment
 import io.github.a13e300.scanner.R
 import io.github.a13e300.scanner.databinding.FragmentScanningResultBinding
 
-private const val ARG_PARAM1 = "result"
-
 class ScanningResult : Fragment() {
     private var result: String? = null
+
+    companion object {
+        private const val ARG_RESULT = "result"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            result = it.getString(ARG_PARAM1)
+            result = it.getString(ARG_RESULT)
         }
     }
 
@@ -46,17 +48,5 @@ class ScanningResult : Fragment() {
             }
         }
         return binding.root
-    }
-
-
-
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ScanningResult().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                }
-            }
     }
 }

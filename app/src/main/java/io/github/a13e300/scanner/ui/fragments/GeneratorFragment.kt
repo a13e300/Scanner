@@ -22,10 +22,11 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.zxing.WriterException
 import io.github.a13e300.scanner.R
-import io.github.a13e300.scanner.StorageUtils
 import io.github.a13e300.scanner.databinding.FragmentContentInputBinding
 import io.github.a13e300.scanner.databinding.FragmentGeneratorBinding
 import io.github.a13e300.scanner.parcelable
+import io.github.a13e300.scanner.ui.misc.DoneMenuProvider
+import io.github.a13e300.scanner.ui.misc.StorageUtils
 import io.github.a13e300.scanner.ui.models.GeneratorViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -208,29 +209,20 @@ class ContentInputFragment : Fragment() {
         viewModel.info.observe(viewLifecycleOwner) {
             binding.editText.setText(it.content)
         }
-        requireActivity().addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                return menuInflater.inflate(R.menu.done_button_menu, menu)
+        requireActivity().addMenuProvider(object : DoneMenuProvider() {
+            override fun onDone(): Boolean {
+                viewModel.info.value =
+                    viewModel.info.value!!.copy(content = binding.editText.text.toString())
+                findNavController().navigateUp()
+                return true
             }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return when (menuItem.itemId) {
-                    R.id.done -> {
-                        viewModel.info.value = viewModel.info.value!!.copy(content = binding.editText.text.toString())
-                        findNavController().navigateUp()
-                        true
-                    }
-                    else -> false
-                }
-            }
-
         }, viewLifecycleOwner)
-        // this.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
         return binding.root
     }
 
     override fun onResume() {
         super.onResume()
+        // show input method on resume
         binding.editText.apply {
             requestFocus()
             selectAll()
