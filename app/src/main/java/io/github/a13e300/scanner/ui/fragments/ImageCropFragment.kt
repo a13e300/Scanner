@@ -49,20 +49,21 @@ class ImageCropFragment : Fragment() {
         }
         requireActivity().addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                return menuInflater.inflate(R.menu.image_cropper_menu, menu)
+                return menuInflater.inflate(R.menu.done_button_menu, menu)
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                when (menuItem.itemId) {
-                    R.id.image_crop_done -> {
+                return when (menuItem.itemId) {
+                    R.id.done -> {
                         binding.cropImageView.croppedImageAsync(
                             reqWidth = mRequest.size,
                             reqHeight = mRequest.size,
                             customOutputUri = mRequest.dest
                         )
+                        true
                     }
+                    else -> false
                 }
-                return true
             }
 
         }, viewLifecycleOwner)

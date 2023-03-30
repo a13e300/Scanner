@@ -1,17 +1,18 @@
 package io.github.a13e300.scanner.ui.fragments
 
-import android.app.Dialog
+import android.content.Context
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.text.InputType
 import android.view.*
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.view.MenuProvider
 import androidx.core.view.isGone
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
@@ -121,10 +122,17 @@ class GeneratorFragment : Fragment() {
         viewModel.iconType.value = id
     }
 
+    private fun updatePreviewContentText() {
+        binding.editText.apply {
+            setText(viewModel.info.value?.content)
+            inputType = InputType.TYPE_NULL
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.info.observe(viewLifecycleOwner) {
-            binding.editText.setText(it.content)
+            updatePreviewContentText()
             try {
                 viewModel.updateQRCode()
             } catch (e: WriterException) {
@@ -136,11 +144,8 @@ class GeneratorFragment : Fragment() {
         viewModel.image.observe(viewLifecycleOwner) {
             binding.image.setImageBitmap(it)
         }
-        binding.editText.apply {
-            setText(viewModel.info.value?.content)
-            setOnClickListener {
-                ContentInputFragment().show(parentFragmentManager, "dialog")
-            }
+        binding.editText.setOnClickListener {
+            findNavController().navigate(R.id.action_input_content)
         }
         viewModel.iconType.apply {
             observe(viewLifecycleOwner) {
@@ -191,24 +196,46 @@ class GeneratorFragment : Fragment() {
     }
 }
 
-class ContentInputFragment : DialogFragment() {
+class ContentInputFragment : Fragment() {
     private val viewModel by activityViewModels<GeneratorViewModel>()
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        // FIXME: textInput disappearedwhen soft input shown on API 22
-        val binding = FragmentContentInputBinding.inflate(requireActivity().layoutInflater, null, false)
-        viewModel.info.observe(this) {
+    private lateinit var binding: FragmentContentInputBinding
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentContentInputBinding.inflate(inflater, container, false)
+        viewModel.info.observe(viewLifecycleOwner) {
             binding.editText.setText(it.content)
         }
-        binding.editText.requestFocus()
-        return MaterialAlertDialogBuilder(requireContext())
-            .setTitle(getString(R.string.qr_code_content))
-            .setView(binding.root)
-            .setPositiveButton(R.string.ok) { _, _ ->
-                viewModel.info.value = viewModel.info.value!!.copy(content = binding.editText.text.toString())
+        requireActivity().addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                return menuInflater.inflate(R.menu.done_button_menu, menu)
             }
-            .setNegativeButton(R.string.cancel, null)
-            .create().apply {
-                this.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.done -> {
+                        viewModel.info.value = viewModel.info.value!!.copy(content = binding.editText.text.toString())
+                        findNavController().navigateUp()
+                        true
+                    }
+                    else -> false
+                }
             }
+
+        }, viewLifecycleOwner)
+        // this.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+        return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.editText.apply {
+            requestFocus()
+            selectAll()
+        }
+        val imManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imManager.showSoftInput(binding.editText, InputMethodManager.SHOW_IMPLICIT)
     }
 }

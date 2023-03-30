@@ -10,9 +10,9 @@
         android:label="@string/title_generator"
         tools:layout="@layout/fragment_generator" >
         <action android:id="@+id/crop_for_icon"
-            app:destination="@id/image_cropper">
-            <argument app:argType="android.net.Uri" android:name="uri" />
-        </action>
+            app:destination="@id/image_cropper" />
+        <action android:id="@+id/action_input_content"
+            app:destination="@id/input_content" />
     </fragment>
 
     <fragment
@@ -20,4 +20,10 @@
         android:name="io.github.a13e300.scanner.ui.fragments.ImageCropFragment"
         android:label="@string/crop_image"
         tools:layout="@layout/fragment_image_crop" />
+
+    <fragment
+        android:id="@+id/input_content"
+        android:name="io.github.a13e300.scanner.ui.fragments.ContentInputFragment"
+        android:label="@string/qr_code_content"
+        tools:layout="@layout/fragment_content_input" />
 </navigation>
