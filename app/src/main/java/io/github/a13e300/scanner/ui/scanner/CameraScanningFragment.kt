@@ -1,7 +1,6 @@
 package io.github.a13e300.scanner.ui.scanner
 
 import android.Manifest
-import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -19,12 +18,10 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
 import io.github.a13e300.scanner.QRCodeAnalyzer
 import io.github.a13e300.scanner.R
 import io.github.a13e300.scanner.databinding.FragmentCameraScanningBinding
-import io.github.a13e300.scanner.databinding.FragmentScanResultBinding
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -122,8 +119,6 @@ class CameraScanningFragment : Fragment() {
             if (result != null) {
                 if (viewModel.isScanning.value == true) {
                     viewModel.isScanning.value = false
-                    // val resultDialog = ResultFragment()
-                    // resultDialog.show(childFragmentManager, "Result")
                     findNavController().navigate(R.id.action_navigation_camera_scan_to_navigation_scanning_result,
                         bundleOf("result" to result)
                     )
@@ -149,24 +144,3 @@ class CameraScanningFragment : Fragment() {
     }
 }
 
-class ResultFragment: BottomSheetDialogFragment() {
-    private val viewModel: ScannerModel by viewModels({ requireParentFragment() })
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val binding = FragmentScanResultBinding.inflate(inflater, container, false)
-        viewModel.scanResult.observe(this) {
-            binding.resultContent.text = it
-        }
-        return binding.root
-    }
-
-    override fun onDismiss(dialog: DialogInterface) {
-        super.onDismiss(dialog)
-        viewModel.isScanning.value = true
-        viewModel.scanResult.value = null
-    }
-}

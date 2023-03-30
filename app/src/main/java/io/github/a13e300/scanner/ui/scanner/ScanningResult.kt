@@ -30,7 +30,8 @@ class ScanningResult : Fragment() {
     ): View {
         val binding = FragmentScanningResultBinding.inflate(inflater, container, false)
         binding.apply {
-            resultText.setText(result)
+            // FIXME: autoLink bug
+            resultText.text = result
             copyResult.setOnClickListener {
                 val cm = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                 cm.setPrimaryClip(ClipData.newPlainText("", result))
