@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.CallSuper
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import com.google.android.material.snackbar.Snackbar
 import io.github.a13e300.scanner.R
 
@@ -20,6 +23,16 @@ abstract class BaseFragment : Fragment() {
         newContainer.addView(content)
         return view
     }
+
+    @CallSuper
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        onSetMenuProvider()?.let {
+            requireActivity().addMenuProvider(it, viewLifecycleOwner, Lifecycle.State.RESUMED)
+        }
+    }
+
+    protected open fun onSetMenuProvider(): MenuProvider? = null
 
     abstract fun onCreateContent(
         inflater: LayoutInflater,

@@ -22,8 +22,10 @@
     <string name="custom_icon_title">Custom Icon</string>
     <string name="custom_icon_change">Change</string>
     <string name="custom_icon_clear">Clear</string>
-    <string name="share_qr_code_title">Share</string>
+    <string name="share">Share</string>
     <string name="scan_from_file">Scan from file</string>
     <string name="qr_code_not_found">No QR Code found in image</string>
     <string name="qr_code_cancelled">Cancelled</string>
+    <string name="tips_copied">Copied to clipboard</string>
+    <string name="copy">Copy</string>
 </resources>

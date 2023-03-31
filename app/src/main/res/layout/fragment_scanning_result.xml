@@ -30,20 +30,22 @@
                 android:textIsSelectable="true"
                 android:minLines="10"
                 android:autoLink="all" />
-            <androidx.constraintlayout.utils.widget.ImageFilterButton
+            <io.github.a13e300.scanner.ui.views.ImageActionButton
                 android:id="@+id/copy_result"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 app:round="25dp"
                 android:src="@drawable/ic_copy"
+                android:contentDescription="@string/copy"
                 android:background="?android:selectableItemBackground"
                 app:layout_constraintTop_toBottomOf="@id/result_text"
-                app:layout_constraintEnd_toEndOf="parent" />
-            <androidx.constraintlayout.utils.widget.ImageFilterButton
+                app:layout_constraintEnd_toEndOf="parent"/>
+            <io.github.a13e300.scanner.ui.views.ImageActionButton
                 android:id="@+id/share_result"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 app:round="25dp"
+                android:contentDescription="@string/share"
                 android:src="@drawable/ic_share"
                 android:background="?android:selectableItemBackground"
                 app:layout_constraintTop_toBottomOf="@id/result_text"

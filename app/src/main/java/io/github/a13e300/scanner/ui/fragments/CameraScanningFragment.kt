@@ -14,7 +14,6 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
-import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import io.github.a13e300.scanner.QRCodeAnalyzer
@@ -126,8 +125,6 @@ class CameraScanningFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // temporary fix camera preview not filling parent
-        container?.findViewById<NestedScrollView>(R.id.content)?.isFillViewport = true
         _binding = FragmentCameraScanningBinding.inflate(inflater, container, false)
         return binding.root
     }

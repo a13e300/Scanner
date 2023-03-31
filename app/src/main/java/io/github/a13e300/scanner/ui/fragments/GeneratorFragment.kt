@@ -14,7 +14,6 @@ import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.view.MenuProvider
 import androidx.core.view.isGone
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
@@ -55,32 +54,32 @@ class GeneratorFragment : BaseFragment() {
         }
     }
 
+    override fun onSetMenuProvider(): MenuProvider = object : MenuProvider {
+        override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+            menuInflater.inflate(R.menu.qr_generator_menu, menu)
+        }
+
+        override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+            return when (menuItem.itemId) {
+                R.id.save_qr_code -> {
+                    saveImage()
+                    true
+                }
+                R.id.share_qr_code -> {
+                    shareImage()
+                    true
+                }
+                else -> false
+            }
+        }
+
+    }
+
     override fun onCreateContent(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        requireActivity().addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.qr_generator_menu, menu)
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return when (menuItem.itemId) {
-                    R.id.save_qr_code -> {
-                        saveImage()
-                        true
-                    }
-                    R.id.share_qr_code -> {
-                        shareImage()
-                        true
-                    }
-                    else -> false
-                }
-            }
-
-        }, viewLifecycleOwner)
         _binding = FragmentGeneratorBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -110,7 +109,7 @@ class GeneratorFragment : BaseFragment() {
                             FileProvider.getUriForFile(ctx, "${BuildConfig.APPLICATION_ID}.fp", file)
                         )
                         type = "image/png"
-                    }.let { Intent.createChooser(it, getString(R.string.share_qr_code_title)) }
+                    }.let { Intent.createChooser(it, getString(R.string.share)) }
                     startActivity(intent)
                 }
             }
@@ -217,10 +216,10 @@ class GeneratorFragment : BaseFragment() {
     }
 }
 
-class ContentInputFragment : Fragment() {
+class ContentInputFragment : BaseFragment() {
     private val viewModel by activityViewModels<GeneratorViewModel>()
     private lateinit var binding: FragmentContentInputBinding
-    override fun onCreateView(
+    override fun onCreateContent(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -229,15 +228,16 @@ class ContentInputFragment : Fragment() {
         viewModel.info.observe(viewLifecycleOwner) {
             binding.editText.setText(it.content)
         }
-        requireActivity().addMenuProvider(object : DoneMenuProvider() {
-            override fun onDone(): Boolean {
-                viewModel.info.value =
-                    viewModel.info.value!!.copy(content = binding.editText.text.toString())
-                findNavController().navigateUp()
-                return true
-            }
-        }, viewLifecycleOwner)
         return binding.root
+    }
+
+    override fun onSetMenuProvider(): MenuProvider = object : DoneMenuProvider() {
+        override fun onDone(): Boolean {
+            viewModel.info.value =
+                viewModel.info.value!!.copy(content = binding.editText.text.toString())
+            findNavController().navigateUp()
+            return true
+        }
     }
 
     override fun onResume() {
@@ -249,5 +249,11 @@ class ContentInputFragment : Fragment() {
         }
         val imManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imManager.showSoftInput(binding.editText, InputMethodManager.SHOW_IMPLICIT)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        val imManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imManager.hideSoftInputFromWindow(binding.editText.windowToken, 0)
     }
 }

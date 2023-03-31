@@ -28,7 +28,7 @@ class ScannerHomeFragment : BaseFragment() {
     ): View {
         val binding = FragmentScannerHomeBinding.inflate(inflater, container, false)
         binding.scanWithCameraButton.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_scanner_home_to_navigation_camera_scan)
+            findNavController().navigate(R.id.action_scan_with_camera)
         }
         binding.scanFromFileButton.setOnClickListener {
             pickImageFileLauncher.launch("image/*")
@@ -71,7 +71,7 @@ class ScannerHomeFragment : BaseFragment() {
                 }
             }
             if (resultText != null) {
-                findNavController().navigate(R.id.navigation_scanning_result,
+                findNavController().navigate(R.id.action_scan_from_file,
                     bundleOf("result" to resultText)
                 )
             } else {

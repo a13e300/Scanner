@@ -36,6 +36,7 @@ class ScanningResultFragment : BaseFragment() {
             copyResult.setOnClickListener {
                 val cm = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                 cm.setPrimaryClip(ClipData.newPlainText("", result))
+                showSnackBar(getString(R.string.tips_copied))
             }
             shareResult.setOnClickListener {
                 startActivity(Intent.createChooser(
