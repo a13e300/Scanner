@@ -11,8 +11,19 @@
         android:label="@string/title_scanner"
         tools:layout="@layout/fragment_scanner_home" >
         <action
-            android:id="@+id/action_navigation_scanner_home_to_navigation_camera_scan"
-            app:destination="@id/navigation_camera_scan" />
+            android:id="@+id/action_scan_with_camera"
+            app:destination="@id/navigation_camera_scan"
+            app:enterAnim="@anim/anim_enter"
+            app:exitAnim="@anim/anim_exit"
+            app:popEnterAnim="@anim/anim_pop_enter"
+            app:popExitAnim="@anim/anim_pop_exit" />
+        <action
+            android:id="@+id/action_scan_from_file"
+            app:destination="@id/navigation_scanning_result"
+            app:enterAnim="@anim/anim_enter"
+            app:exitAnim="@anim/anim_exit"
+            app:popEnterAnim="@anim/anim_pop_enter"
+            app:popExitAnim="@anim/anim_pop_exit" />
     </fragment>
 
     <fragment
@@ -24,7 +35,11 @@
             android:id="@+id/action_navigation_camera_scan_to_navigation_scanning_result"
             app:destination="@id/navigation_scanning_result"
             app:popUpTo="@id/navigation_camera_scan"
-            app:popUpToInclusive="true">
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/anim_enter"
+            app:exitAnim="@anim/anim_exit"
+            app:popEnterAnim="@anim/anim_pop_enter"
+            app:popExitAnim="@anim/anim_pop_exit">
             <argument android:name="result" app:argType="string" />
         </action>
     </fragment>

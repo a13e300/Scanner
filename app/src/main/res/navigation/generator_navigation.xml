@@ -10,9 +10,18 @@
         android:label="@string/title_generator"
         tools:layout="@layout/fragment_generator" >
         <action android:id="@+id/crop_for_icon"
-            app:destination="@id/image_cropper" />
-        <action android:id="@+id/action_input_content"
-            app:destination="@id/input_content" />
+            app:destination="@id/image_cropper"
+            app:enterAnim="@anim/anim_enter"
+            app:exitAnim="@anim/anim_exit"
+            app:popEnterAnim="@anim/anim_pop_enter"
+            app:popExitAnim="@anim/anim_pop_exit" />
+        <action
+            android:id="@+id/action_input_content"
+            app:destination="@id/input_content"
+            app:enterAnim="@anim/anim_enter"
+            app:exitAnim="@anim/anim_exit"
+            app:popEnterAnim="@anim/anim_pop_enter"
+            app:popExitAnim="@anim/anim_pop_exit" />
     </fragment>
 
     <fragment
