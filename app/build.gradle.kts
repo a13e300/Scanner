@@ -1,9 +1,20 @@
+import java.io.FileInputStream
+import java.util.*
+
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.parcelize)
 }
+
+
+val keystorePropertiesFile = rootProject.file("keystore.properties")
+val keystoreProperties = if (keystorePropertiesFile.isFile && keystorePropertiesFile.canRead()) {
+    Properties().apply {
+        load(FileInputStream(keystorePropertiesFile))
+    }
+} else null
 
 android {
     namespace = "io.github.a13e300.scanner"
@@ -16,11 +27,27 @@ android {
         versionCode = 1
         versionName = "1.0"
     }
+    signingConfigs {
+        if (keystoreProperties != null)
+            create("release") {
+                keyAlias = keystoreProperties["keyAlias"] as String
+                keyPassword = keystoreProperties["keyPassword"] as String
+                storeFile = file(keystoreProperties["storeFile"] as String)
+                storePassword = keystoreProperties["storePassword"] as String
+            }
+    }
 
     buildTypes {
+        debug {
+            applicationIdSuffix = ".debug"
+        }
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            if (keystoreProperties != null) {
+                signingConfig = signingConfigs["release"]
+            }
         }
     }
     compileOptions {
