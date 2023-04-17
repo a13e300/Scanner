@@ -8,6 +8,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.preference.PreferenceManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.github.a13e300.scanner.databinding.ActivityMainBinding
 import rikka.insets.WindowInsetsHelper
@@ -31,8 +32,12 @@ class MainActivity : AppCompatActivity() {
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
         val navController = navHostFragment.navController
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+        val defaultPage = PreferenceManager.getDefaultSharedPreferences(this).getString("default_page", "scanner")
+        val graph = navController.navInflater.inflate(R.navigation.mobile_navigation)
+        val startDestination = if (defaultPage == "generator") R.id.generator_navigation
+            else R.id.scanning_navigation
+        graph.setStartDestination(startDestination)
+        navController.graph = graph
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_generator, R.id.navigation_scanner_home, R.id.navigation_settings

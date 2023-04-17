@@ -36,7 +36,7 @@
                 android:layout_height="50dp"
                 app:round="25dp"
                 android:src="@drawable/ic_copy"
-                android:contentDescription="@string/copy"
+                android:contentDescription="@string/string_copy"
                 android:background="?android:selectableItemBackground"
                 app:layout_constraintTop_toBottomOf="@id/result_text"
                 app:layout_constraintEnd_toEndOf="parent"/>

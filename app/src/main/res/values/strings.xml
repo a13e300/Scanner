@@ -27,5 +27,7 @@
     <string name="qr_code_not_found">No QR Code found in image</string>
     <string name="qr_code_cancelled">Cancelled</string>
     <string name="tips_copied">Copied to clipboard</string>
-    <string name="copy">Copy</string>
+    <string name="string_copy">Copy</string>
+    <string name="auto_open_links_title">Open scanned links automatically</string>
+    <string name="default_page_title">Default Page</string>
 </resources>

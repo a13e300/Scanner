@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <SwitchPreferenceCompat
+        android:key="auto_open_links"
+        android:title="@string/auto_open_links_title" />
+    <DropDownPreference
+        android:key="default_page"
+        android:title="@string/default_page_title"
+        android:entries="@array/pages"
+        android:entryValues="@array/page_values"
+        android:defaultValue="scanner"
+        app:useSimpleSummaryProvider="true"/>
+</PreferenceScreen>

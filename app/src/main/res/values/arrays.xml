@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pages" >
+        <item>@string/title_scanner</item>
+        <item>@string/title_generator</item>
+    </string-array>
+    <string-array name="page_values">
+        <item>scanner</item>
+        <item>generator</item>
+    </string-array>
+</resources>
