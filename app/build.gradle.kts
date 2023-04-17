@@ -64,13 +64,14 @@ android {
 }
 
 dependencies {
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.2")
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
     implementation(libs.androidX.ktx)
     implementation(libs.androidX.appcompact)
     implementation(libs.androidX.constraintLayout)
     implementation(libs.bundles.androidX.lifecycle)
     implementation(libs.bundles.androidX.navigation)
     implementation(libs.bundles.androidX.camera)
+    implementation(libs.bundles.androidX.preference)
 
     implementation(libs.bundles.rikkax)
     implementation(libs.vanniktech.imagecropper)
