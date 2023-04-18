@@ -1,4 +1,4 @@
-package io.github.a13e300.scanner
+package io.github.a13e300.scanner.ui.misc
 
 import android.content.Intent
 import android.net.Uri
@@ -6,6 +6,7 @@ import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.Patterns
+import androidx.fragment.app.Fragment
 
 inline fun <reified T : Parcelable> Intent.parcelable(key: String): T? = when {
     SDK_INT >= 33 -> getParcelableExtra(key, T::class.java)
@@ -35,3 +36,10 @@ fun checkUrl(s: String): Uri? =
     } else if (Patterns.WEB_URL.matcher("https://$s").matches()) {
         Uri.parse("https://$s")
     } else null
+
+fun Fragment.openWebLink(uri: Uri) {
+    startActivity(Intent(Intent.ACTION_VIEW, uri).apply {
+        addCategory(Intent.CATEGORY_BROWSABLE)
+        addCategory(Intent.CATEGORY_DEFAULT)
+    })
+}

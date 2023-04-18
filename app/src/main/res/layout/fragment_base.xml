@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:viewBindingIgnore="true">
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/content"
+        android:id="@+id/license_detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true" />

@@ -1,14 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <SwitchPreferenceCompat
-        android:key="auto_open_links"
-        android:title="@string/auto_open_links_title" />
-    <DropDownPreference
-        android:key="default_page"
-        android:title="@string/default_page_title"
-        android:entries="@array/pages"
-        android:entryValues="@array/page_values"
-        android:defaultValue="scanner"
-        app:useSimpleSummaryProvider="true"/>
+    <PreferenceCategory
+        android:title="@string/title_preferences"
+        app:iconSpaceReserved="false">
+        <SwitchPreferenceCompat
+            android:icon="@drawable/ic_browser"
+            android:key="auto_open_links"
+            android:title="@string/auto_open_links_title" />
+        <DropDownPreference
+            android:icon="@drawable/ic_home"
+            android:key="default_page"
+            android:title="@string/default_page_title"
+            android:entries="@array/pages"
+            android:entryValues="@array/page_values"
+            android:defaultValue="scanner"
+            app:useSimpleSummaryProvider="true"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/title_about"
+        app:iconSpaceReserved="false">
+        <Preference
+            android:icon="@drawable/ic_person"
+            android:title="@string/authors_title"
+            android:summary="@string/authors_summary"
+            android:persistent="false" />
+        <Preference
+            android:icon="@drawable/ic_open"
+            android:title="@string/project_link_title"
+            android:key="project_link"
+            android:summary="@string/project_link_summary"
+            android:persistent="false" />
+        <Preference
+            android:icon="@drawable/ic_document"
+            android:title="@string/open_source_licenses"
+            android:key="licenses"
+            android:persistent="false" />
+    </PreferenceCategory>
 </PreferenceScreen>

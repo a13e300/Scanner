@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/list"
+    android:name="io.github.a13e300.scanner.ui.fragments.LicensesFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutManager="LinearLayoutManager"
+    tools:context=".ui.fragments.LicensesFragment"
+    tools:listitem="@layout/fragment_licenses"
+    android:paddingTop="?actionBarSize"
+    app:fitsSystemWindowsInsets="top"/>

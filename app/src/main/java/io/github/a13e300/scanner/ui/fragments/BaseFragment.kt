@@ -18,7 +18,7 @@ abstract class BaseFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_base, container, false)
-        val newContainer = view.findViewById<ViewGroup>(R.id.content)
+        val newContainer = view.findViewById<ViewGroup>(R.id.license_detail)
         val content = onCreateContent(inflater, newContainer, savedInstanceState)
         newContainer.addView(content)
         return view

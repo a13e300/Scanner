@@ -64,6 +64,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.legacy.support.v4)
+    implementation(libs.recyclerview)
     coreLibraryDesugaring(libs.desugar.jdk.libs)
     implementation(libs.androidX.ktx)
     implementation(libs.androidX.appcompact)

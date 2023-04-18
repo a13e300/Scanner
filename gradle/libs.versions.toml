@@ -7,6 +7,8 @@ androidX-navigation = "2.5.3"
 kotlin = "1.8.20"
 androidX-camera = "1.2.2"
 androidX-preference = "1.2.0"
+legacy-support-v4 = "1.0.0"
+recyclerview = "1.3.0"
 
 [libraries]
 desugar_jdk_libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar_jdk_libs" }
@@ -40,6 +42,8 @@ rikkax-layoutinflater = "dev.rikka.rikkax.layoutinflater:layoutinflater:1.3.0"
 
 vanniktech-imagecropper = "com.vanniktech:android-image-cropper:4.5.0"
 google-zxing = "com.google.zxing:core:3.5.1"
+legacy-support-v4 = { group = "androidx.legacy", name = "legacy-support-v4", version.ref = "legacy-support-v4" }
+recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -11,8 +11,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.preference.PreferenceManager
 import io.github.a13e300.scanner.R
-import io.github.a13e300.scanner.checkUrl
 import io.github.a13e300.scanner.databinding.FragmentScanningResultBinding
+import io.github.a13e300.scanner.ui.misc.checkUrl
+import io.github.a13e300.scanner.ui.misc.openWebLink
 
 class ScanningResultFragment : BaseFragment() {
     private var result: String? = null
@@ -29,10 +30,7 @@ class ScanningResultFragment : BaseFragment() {
                 result?.also {
                     val url = checkUrl(it) ?: return@also
                     Log.d("FIVECC", "auto open url $url")
-                    startActivity(Intent(Intent.ACTION_VIEW, url).apply {
-                        addCategory(Intent.CATEGORY_BROWSABLE)
-                        addCategory(Intent.CATEGORY_DEFAULT)
-                    })
+                    openWebLink(url)
                 }
             }
         }

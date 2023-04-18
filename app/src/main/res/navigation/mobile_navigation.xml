@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
     app:startDestination="@id/scanning_navigation">
 
@@ -9,9 +8,5 @@
 
     <include app:graph="@navigation/scanning_navigation" />
 
-    <fragment
-        android:id="@+id/navigation_settings"
-        android:name="io.github.a13e300.scanner.ui.fragments.SettingsFragment"
-        android:label="@string/title_settings"
-        tools:layout="@layout/fragment_settings" />
+    <include app:graph="@navigation/settings_navigation" />
 </navigation>

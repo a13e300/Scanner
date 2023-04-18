@@ -11,8 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import io.github.a13e300.scanner.databinding.FragmentImageCropBinding
-import io.github.a13e300.scanner.parcelable
 import io.github.a13e300.scanner.ui.misc.DoneMenuProvider
+import io.github.a13e300.scanner.ui.misc.parcelable
 import kotlinx.parcelize.Parcelize
 
 

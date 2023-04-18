@@ -30,5 +30,10 @@
     <string name="tips_copied">已复制到剪切板</string>
     <string name="string_copy">复制</string>
     <string name="auto_open_links_title">自动打开扫描的链接</string>
-    <string name="default_page_title">默认页面</string>
+    <string name="default_page_title">首页</string>
+    <string name="title_preferences">偏好</string>
+    <string name="title_about">关于</string>
+    <string name="authors_title">作者</string>
+    <string name="project_link_title">项目地址</string>
+    <string name="open_source_licenses">开放源代码协议</string>
 </resources>
