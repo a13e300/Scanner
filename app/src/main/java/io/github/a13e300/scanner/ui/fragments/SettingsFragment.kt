@@ -16,7 +16,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.preference, rootKey)
         findPreference<Preference>("project_link")?.apply {
             setOnPreferenceClickListener {
-                openWebLink(Uri.parse("https://github.com/5ec1cff/Scanner"))
+                openWebLink(Uri.parse("https://github.com/a13e300/Scanner"))
                 true
             }
         }

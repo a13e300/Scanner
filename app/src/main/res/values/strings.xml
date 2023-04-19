@@ -36,5 +36,5 @@
     <string name="project_link_title">Project link</string>
     <string name="open_source_licenses">Open-source Licenses</string>
     <string name="authors_summary" translatable="false">5ec1cff,Withnohair,Dirkkroos</string>
-    <string name="project_link_summary" translatable="false">Github</string>
+    <string name="project_link_summary" translatable="false">https://github.com/a13e300/Scanner</string>
 </resources>
