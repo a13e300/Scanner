@@ -6,7 +6,12 @@ import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
 import android.text.InputType
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
@@ -32,6 +37,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
 
+// GeneratorFragment
+
 class GeneratorFragment : BaseFragment() {
     companion object {
         private const val REQUEST_CROP_FOR_ICON = "crop_for_icon"
@@ -39,9 +46,6 @@ class GeneratorFragment : BaseFragment() {
     }
 
     private var _binding: FragmentGeneratorBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     private val viewModel by activityViewModels<GeneratorViewModel>()
@@ -87,6 +91,7 @@ class GeneratorFragment : BaseFragment() {
     private fun saveImage() {
         viewModel.image.value?.also { img ->
             lifecycleScope.launch {
+                // 在 IO 线程执行保存操作
                 withContext(Dispatchers.IO) {
                     StorageUtils.saveImages(requireContext(), img)
                 }
@@ -98,6 +103,7 @@ class GeneratorFragment : BaseFragment() {
     private fun shareImage() {
         viewModel.image.value?.also { img ->
             lifecycleScope.launch {
+                // IO 线程将图片写入临时目录
                 withContext(Dispatchers.IO) {
                     val ctx = requireContext()
                     val file = File(ctx.filesDir, SHARE_PATH)
@@ -117,13 +123,16 @@ class GeneratorFragment : BaseFragment() {
     }
 
     private val pickCustomIconLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) {
+        // 处理自定义图标选择的文件
         it ?: return@registerForActivityResult
+        // 启动图片裁剪
         findNavController().navigate(R.id.crop_for_icon,
             bundleOf("uri" to ImageCropRequest(
                 it, REQUEST_CROP_FOR_ICON, 100, viewModel.customIconFile.toUri()
             )
             )
         )
+        // 等待裁剪图片结果（如果取消会自动 unregister）
         setFragmentResultListener(REQUEST_CROP_FOR_ICON) { _, data ->
             if (viewModel.loadCustomIcon()) {
                 viewModel.iconType.value = R.id.icon_custom
@@ -132,6 +141,7 @@ class GeneratorFragment : BaseFragment() {
     }
 
     private fun updateLogo(id: Int, oldId: Int) {
+        // 更新图标，如果选择自定义图标而不存在会选择文件
         if (id == R.id.icon_custom) {
             if (!viewModel.loadCustomIcon()) {
                 binding.iconGroup.check(oldId)
@@ -143,6 +153,7 @@ class GeneratorFragment : BaseFragment() {
     }
 
     private fun updatePreviewContentText() {
+        // 更新二维码编码的文本预览
         binding.editText.apply {
             setText(viewModel.info.value?.content)
             inputType = InputType.TYPE_NULL
@@ -191,6 +202,7 @@ class GeneratorFragment : BaseFragment() {
             }
         }
         binding.previewIcon.setOnClickListener {
+            // 显示自定义图标 Dialog
             if (viewModel.iconType.value == R.id.icon_custom) {
                 MaterialAlertDialogBuilder(requireContext())
                     .setTitle(R.string.custom_icon_title)
@@ -217,6 +229,7 @@ class GeneratorFragment : BaseFragment() {
 }
 
 class ContentInputFragment : BaseFragment() {
+    // 和 GeneratorFragment 共享 viewModel ，以便更新二维码内容
     private val viewModel by activityViewModels<GeneratorViewModel>()
     private lateinit var binding: FragmentContentInputBinding
     override fun onCreateContent(
@@ -242,17 +255,19 @@ class ContentInputFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        // show input method on resume
+        // 全选文本
         binding.editText.apply {
             requestFocus()
             selectAll()
         }
+        // 显示软键盘
         val imManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imManager.showSoftInput(binding.editText, InputMethodManager.SHOW_IMPLICIT)
     }
 
     override fun onPause() {
         super.onPause()
+        // 离开时收起软键盘
         val imManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imManager.hideSoftInputFromWindow(binding.editText.windowToken, 0)
     }

@@ -26,7 +26,8 @@ class ScanningResultFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             result = it.getString(ARG_RESULT)
-            if(PreferenceManager.getDefaultSharedPreferences(requireContext()).getBoolean("auto_open_links", false)) {
+            // 自动打开链接（需要偏好中开启）
+            if (PreferenceManager.getDefaultSharedPreferences(requireContext()).getBoolean("auto_open_links", false)) {
                 result?.also {
                     val url = checkUrl(it) ?: return@also
                     Log.d("FIVECC", "auto open url $url")

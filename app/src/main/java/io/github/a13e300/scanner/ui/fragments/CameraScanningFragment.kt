@@ -63,34 +63,31 @@ class CameraScanningFragment : BaseFragment() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
 
         cameraProviderFuture.addListener({
-            // Used to bind the lifecycle of cameras to the lifecycle owner
+            // 用于绑定相机到生命周期所有者
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
 
-            // Preview
+            // 相机预览
             val preview = Preview.Builder()
                 .build()
                 .also {
                     it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
                 }
 
+            // 二维码分析器
             val imageAnalyzer = ImageAnalysis.Builder()
                 .build()
                 .also {
                     it.setAnalyzer(cameraExecutor, QRCodeAnalyzer(viewModel.isScanning, viewModel.scanResult))
                 }
-
-
-            // Select back camera as a default
+            // 默认选择后摄
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
             try {
-                // Unbind use cases before rebinding
+                // 在重新绑定之前解除绑定的用例
                 cameraProvider.unbindAll()
-
-                // Bind use cases to camera
+                // 绑定上面两个用例到相机
                 cameraProvider.bindToLifecycle(
                     this, cameraSelector, preview, imageAnalyzer)
-
             } catch(exc: Exception) {
                 Log.e(TAG, "Use case binding failed", exc)
             }
@@ -103,6 +100,7 @@ class CameraScanningFragment : BaseFragment() {
         if (allPermissionsGranted()) {
             startCamera()
         } else {
+            // 请求相机权限
             requestPermissionLauncher.launch(REQUIRED_PERMISSIONS)
         }
 

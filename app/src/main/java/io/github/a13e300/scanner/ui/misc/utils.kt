@@ -34,7 +34,7 @@ fun checkUrl(s: String): Uri? =
     if (Patterns.WEB_URL.matcher(s).matches()) {
         Uri.parse(s)
     } else if (Patterns.WEB_URL.matcher("https://$s").matches()) {
-        Uri.parse("https://$s")
+        Uri.parse("https://$s") // 如果链接没有带协议，尝试加上
     } else null
 
 fun Fragment.openWebLink(uri: Uri) {
